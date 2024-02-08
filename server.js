@@ -19,6 +19,11 @@ app.use("/service", serviceRoutes);
 const blogRoutes=require("./routes/blogRoutes/blog.route")
 app.use("/blogs",blogRoutes)
 
+const galleryRoutes=require("./routes/galleryRoutes/gallery.route")
+app.use("/gallery",galleryRoutes)
+
+const userRoutes=require("./routes/userRoutes/user.route")
+app.use("/user",userRoutes)
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
