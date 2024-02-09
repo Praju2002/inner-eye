@@ -1,4 +1,3 @@
-
 const { Gallery } = require("../models/gallery.model");
 const { errorHandler } = require("../utils/errorHandler");
 const fs = require("fs");
@@ -68,7 +67,7 @@ const deleteAll = async (req, res) => {
   try {
     const gal = await Gallery.find();
     // console.log(gal);
-    if(gal.length==0){
+    if (gal.length == 0) {
       return res.status(404).json({
         message: "images not found",
       });

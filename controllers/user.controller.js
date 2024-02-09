@@ -1,6 +1,7 @@
 const { User } = require("../models/user.model");
 const { errorHandler } = require("../utils/errorHandler");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const saltRounds = 10;
 const registerUser = async (req, res) => {
   const { name, email, phoneNumber, password } = req.body;
@@ -42,8 +43,28 @@ const loginUser = async (req, res) => {
         message: "incorrect password",
       });
     }
-    return res.status(200).json({
+    //jwt token generate and set in cookie
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+        name: user.name,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      }
+    );
+    console.log("SECRET KEY IS", process.env.JWT_SECRET);
+    console.log("token is", token);
+
+    //SET TOKEN
+    res.cookie("token", token);
+
+    return res.status(201).json({
+      statusCode: 201,
       message: "login succesful",
+      succes: true,
     });
   } catch (error) {
     errorHandler(error, res);

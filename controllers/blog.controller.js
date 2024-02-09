@@ -122,12 +122,12 @@ const deleteBlogImage = async (req, res) => {
   let authorImage = req?.files?.authorImage?.[0]?.path;
   try {
     const oldBlog = await Blog.findById(blogId);
-    if (!oldBlog){
+    if (!oldBlog) {
       return res.status(404).json({
-        message:"blog image not found",
-        success:false,
-        statusCode:404
-      })
+        message: "blog image not found",
+        success: false,
+        statusCode: 404,
+      });
     }
 
     const oldImage = oldBlog?.image;
@@ -157,5 +157,5 @@ module.exports = {
   updateBlog,
   updateBlogImage,
   deleteBlog,
-  deleteBlogImage
+  deleteBlogImage,
 };
